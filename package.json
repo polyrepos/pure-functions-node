@@ -1,0 +1,50 @@
+{
+  "name": "@polyrepo/pure-functions-node",
+  "version": "0.0.1",
+  "description": "Pure functions for node.js",
+  "private": false,
+  "main": "./dist/index.cjs",
+  "module": "src/index.ts",
+  "type": "module",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist",
+    "./bin.js"
+  ],
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "scripts": {
+    "lint": "bunx @biomejs/biome format --write ./ && git add . && bunx @biomejs/biome lint ./",
+    "ts": "tsc --noemit --skipLibCheck --incremental --tsBuildInfoFile './node_modules/.tsbuildinfo'",
+    "precommit": "bun lint && bun ts && bun test",
+    "prepare": "husky install",
+    "unbuild": "bunx unbuild"
+  },
+  "polyCopy": {
+    "@polyrepo/template-base": [
+      "package.json.merge",
+      ".github",
+      "LICENSE",
+      ".gitignore",
+      "biome.json",
+      ".husky",
+      "tsconfig.json",
+      "tsconfig.ci.json"
+    ]
+  },
+  "dependencies": {
+    "@polyrepo/pure-functions": "1.0.3"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "1.8.3",
+    "@types/bun": "latest",
+    "husky": "^9.0.11"
+  },
+  "peerDependencies": {
+    "typescript": "^5.5.3"
+  }
+}
